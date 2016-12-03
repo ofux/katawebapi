@@ -23,8 +23,8 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "/v1/rooms", consumes = "application/json", produces = "application/json")
 public interface RoomsApi {
 
-    @ApiOperation(value = "Gets `Room` objects.", notes = "Result is paginated", response = RoomDTO.class, responseContainer = "List", tags = { "Rooms" })
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful response", response = RoomDTO.class) })
+    @ApiOperation(value = "Gets `Room` objects.", notes = "Result is paginated", response = Page.class, responseContainer = "List", tags = { "Rooms" })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful response", response = Page.class) })
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity<Page<RoomDTO>> getAll(Pageable pageable);
 
@@ -33,8 +33,8 @@ public interface RoomsApi {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity<RoomDTO> getOne(@PathVariable("id") Long id);
 
-    @ApiOperation(value = "Gets `Reservation` objects of the room.", notes = "Result is paginated", response = ReservationDTO.class, responseContainer = "List", tags = { "Rooms" })
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful response", response = ReservationDTO.class) })
+    @ApiOperation(value = "Gets `Reservation` objects of the room.", notes = "Result is paginated", response = Page.class, responseContainer = "List", tags = { "Rooms" })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful response", response = Page.class) })
     @RequestMapping(value = "/{id}/reservations", method = RequestMethod.GET)
     ResponseEntity<Page<ReservationDTO>> getAllReservations(@PathVariable("id") Long roomId, //
             @ApiParam(value = "Reservation day", required = false) //

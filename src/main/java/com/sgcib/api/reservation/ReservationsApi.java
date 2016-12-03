@@ -21,8 +21,8 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "/v1/reservations", consumes = "application/json", produces = "application/json")
 public interface ReservationsApi {
 
-    @ApiOperation(value = "Gets `Reservation` objects.", notes = "Result is paginated", response = ReservationDTO.class, responseContainer = "List", tags = { "Reservations" })
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful response", response = ReservationDTO.class) })
+    @ApiOperation(value = "Gets `Reservation` objects.", notes = "Result is paginated", response = Page.class, responseContainer = "List", tags = { "Reservations" })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful response", response = Page.class) })
     @RequestMapping(method = RequestMethod.GET)
     ResponseEntity<Page<ReservationDTO>> getAll(//
             @ApiParam(value = "Room ID", required = false) //
@@ -44,7 +44,7 @@ public interface ReservationsApi {
     ResponseEntity<ReservationDTO> create(@RequestBody ReservationDTO resource);
 
     @ApiOperation(value = "Deletes `Reservation` object.", notes = "", response = ReservationDTO.class, tags = { "Reservations" })
-    @ApiResponses(value = { @ApiResponse(code = 202, message = "Reservation deleted", response = ReservationDTO.class) })
+    @ApiResponses(value = { @ApiResponse(code = 202, message = "Reservation deleted") })
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     ResponseEntity<Void> delete(@PathVariable("id") Long id);
 }
