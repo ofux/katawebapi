@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class RoomDTO extends ResourceSupport {
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     @ApiModelProperty(notes = "Room ID")
     private Long id;
 
@@ -16,12 +16,12 @@ public class RoomDTO extends ResourceSupport {
     @ApiModelProperty(notes = "Room Name")
     private String name;
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     public Long getRoomId() {
         return id;
     }
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     public void setRoomId(Long id) {
         this.id = id;
     }

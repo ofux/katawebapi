@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class ReservationDTO extends ResourceSupport {
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     @ApiModelProperty(notes = "Reservation ID")
     private Long id;
 
@@ -19,7 +19,7 @@ public class ReservationDTO extends ResourceSupport {
     @ApiModelProperty(notes = "Name of the user who booked the room.")
     private String userName;
 
-    @JsonProperty(value = "room", required = true)
+    @JsonProperty(value = "room")
     @ApiModelProperty(notes = "Booked room")
     private RoomDTO room;
 
@@ -35,12 +35,12 @@ public class ReservationDTO extends ResourceSupport {
     @ApiModelProperty(notes = "End time of reservation. This must be an integer between 1 and 24 strictly greater than time_start.")
     private Integer endTime;
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     public Long getReservationId() {
         return id;
     }
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     public void setReservationId(Long id) {
         this.id = id;
     }
