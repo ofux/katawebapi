@@ -173,6 +173,22 @@ public class ReservationServiceImplTest {
         assertThat(result.getEndTime()).isEqualTo(12);
     }
 
+    @Test(expected = ReservationConfictException.class)
+    public void testCreateConflict() throws Exception {
+        // Arrange
+        Date now = new Date();
+        ReservationEntity confilctWith = insertReservation(room0, now, "John", 10, 12);
+
+        ReservationEntity reservation = new ReservationEntity();
+        reservation.setDate(now);
+        reservation.setUserName("John");
+        reservation.setStartTime(11);
+        reservation.setEndTime(13);
+
+        // Act
+        service.create(reservation, room0.getId());
+    }
+
     @Test
     public void testDelete() throws Exception {
         // Arrange

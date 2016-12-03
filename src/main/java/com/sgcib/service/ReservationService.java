@@ -13,7 +13,7 @@ public interface ReservationService {
 
     ReservationEntity getOne(Long id);
 
-    ReservationEntity create(ReservationEntity reservation, Long roomId);
+    ReservationEntity create(ReservationEntity reservation, Long roomId) throws ReservationConfictException;
 
     void delete(Long id);
 }

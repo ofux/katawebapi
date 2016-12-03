@@ -1,6 +1,7 @@
 package com.sgcib.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,13 +43,28 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationEntity create(ReservationEntity reservation, Long roomId) {
+    public ReservationEntity create(ReservationEntity reservation, Long roomId) throws ReservationConfictException {
         RoomEntity room = roomRepo.findOne(roomId);
         if (room == null) {
             throw new IllegalArgumentException("Room with id " + roomId + " could not be found.");
         }
+        if (isInConfict(reservation, roomId)) {
+            throw new ReservationConfictException(roomId, reservation.getDate());
+        }
         reservation.setRoom(room);
+
         return reservationRepo.save(reservation);
+    }
+
+    private boolean isInConfict(ReservationEntity reservation, Long roomId) {
+        List<ReservationEntity> existingReservations = reservationRepo.findAllByRoomIdAndDate(roomId, reservation.getDate());
+        for (ReservationEntity existingReservation : existingReservations) {
+            if ((reservation.getStartTime() < existingReservation.getEndTime() && reservation.getStartTime() >= existingReservation.getStartTime())
+                    || (reservation.getEndTime() > existingReservation.getStartTime() && reservation.getEndTime() <= existingReservation.getEndTime())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

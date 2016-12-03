@@ -37,7 +37,8 @@ public class RoomServiceImplTest {
         Page<RoomEntity> result = service.getAll(null);
 
         // Assert
-        assertThat(result.getTotalElements()).isEqualTo(2);
+        // Because of DataLoader, there are already 10 rooms in DB
+        assertThat(result.getTotalElements()).isEqualTo(12);
     }
 
     @Test
@@ -48,7 +49,8 @@ public class RoomServiceImplTest {
         Page<RoomEntity> result = service.getAll(null);
 
         // Assert
-        assertThat(result.getTotalElements()).isEqualTo(0);
+        // Because of DataLoader, there are already 10 rooms in DB
+        assertThat(result.getTotalElements()).isEqualTo(10);
     }
 
     @Test

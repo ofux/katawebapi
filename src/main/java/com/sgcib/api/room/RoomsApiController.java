@@ -17,6 +17,7 @@ import com.sgcib.api.reservation.ReservationDTO;
 import com.sgcib.api.reservation.ReservationDTOAssembler;
 import com.sgcib.model.reservation.ReservationEntity;
 import com.sgcib.model.room.RoomEntity;
+import com.sgcib.service.ReservationConfictException;
 import com.sgcib.service.ReservationService;
 import com.sgcib.service.RoomService;
 
@@ -57,11 +58,11 @@ public class RoomsApiController implements RoomsApi {
     }
 
     @Override
-    public ResponseEntity<ReservationDTO> createReservation(@RequestParam(value = "roomId", required = true) Long roomId, @RequestBody ReservationDTO resource) {
+    public ResponseEntity<ReservationDTO> createReservation(@RequestParam(value = "roomId", required = true) Long roomId, @RequestBody ReservationDTO resource)
+            throws ReservationConfictException {
         ReservationEntity reservation = reservationDTOAssembler.mapToEntity(resource);
         reservation = reservationService.create(reservation, roomId);
         ReservationDTO reservationDTO = reservationDTOAssembler.mapToDTO(reservation);
-        return new ResponseEntity<ReservationDTO>(reservationDTO, HttpStatus.OK);
+        return new ResponseEntity<ReservationDTO>(reservationDTO, HttpStatus.CREATED);
     }
-
 }

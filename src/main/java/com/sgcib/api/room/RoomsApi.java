@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sgcib.api.reservation.ReservationDTO;
+import com.sgcib.service.ReservationConfictException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,6 +46,7 @@ public interface RoomsApi {
     @ApiOperation(value = "Creates `Reservation` object for the room.", notes = "", response = ReservationDTO.class, tags = { "Rooms" })
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Reservation created", response = ReservationDTO.class) })
     @RequestMapping(value = "/{id}/reservations", method = RequestMethod.POST)
-    ResponseEntity<ReservationDTO> createReservation(@PathVariable(value = "id", required = true) Long roomId, @RequestBody ReservationDTO resource);
+    ResponseEntity<ReservationDTO> createReservation(@PathVariable(value = "id", required = true) Long roomId, @RequestBody ReservationDTO resource)
+            throws ReservationConfictException;
 
 }

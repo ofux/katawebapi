@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sgcib.api.room.RoomDTO;
 
@@ -24,7 +25,8 @@ public class ReservationDTO extends ResourceSupport {
     private RoomDTO room;
 
     @JsonProperty(value = "date", required = true)
-    @ApiModelProperty(notes = "Reservation day")
+    @ApiModelProperty(notes = "Reservation day", example = "2016-01-01")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
     @JsonProperty(value = "time_start", required = true)
